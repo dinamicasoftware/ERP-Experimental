@@ -1,0 +1,21 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices m:DataServiceVersion="1.0" m:MaxDataServiceVersion="3.0" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+    <Schema Namespace="dinamica.erp.wcf" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <EntityType Name="Client">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false" p6:StoreGeneratedPattern="Identity" xmlns:p6="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+        <Property Name="Codigo" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        <Property Name="Nombre" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        <Property Name="NombreFantasia" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        <Property Name="Direccion" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        <Property Name="Localidad" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        <Property Name="CodigoPostal" Type="Edm.String" MaxLength="Max" FixedLength="false" Unicode="true" />
+      </EntityType>
+      <EntityContainer Name="ERPContext" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="ClientsDao" EntityType="dinamica.erp.wcf.Client" />
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
