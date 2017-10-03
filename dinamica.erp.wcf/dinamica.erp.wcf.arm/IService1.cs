@@ -19,7 +19,7 @@ namespace dinamica.erp.wcf.arm
         ArticuloDto GetDataUsingDataContract(ArticuloDto composite);
 
         [OperationContract]
-        IQueryable<ArticuloDto> GetArticulos(Expression<Func<Artículos, bool>> where);
+        IQueryable<ArticuloDto> GetArticulos(Expression<Func<ArticuloDto, bool>> where);
 
         // TODO: agregue aquí sus operaciones de servicio
     }

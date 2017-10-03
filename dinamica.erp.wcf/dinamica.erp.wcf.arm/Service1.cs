@@ -25,7 +25,7 @@ namespace dinamica.erp.wcf.arm
             return composite;
         }
 
-        public IQueryable<ArticuloDto> GetArticulos(Expression<Func<Artículos, bool>> where) //Por que artículos acá? (tabla Artículos de EntityFX)
+        public IQueryable<ArticuloDto> GetArticulos(Expression<Func<ArticuloDto, bool>> where) //Por que artículos acá? (tabla Artículos de EntityFX)
         {
             return (new ElediEntities()).Artículos.Where(where).Select(x => new ArticuloDto { Titulo = x.Título });
     }
