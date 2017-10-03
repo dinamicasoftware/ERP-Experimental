@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb50f240f7bc4a78b73449f82c8c0480" Name="Diagram1">
+        <EntityTypeShape EntityType="ElediModel.Artículos" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElediModel.Banners" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElediModel.BlogPosts" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElediModel.Categorías" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElediModel.Empresas_De_Pago" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElediModel.Formas_de_pago" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElediModel.Imágenes" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElediModel.Marcas" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElediModel.Subcategoría" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="ElediModel.FK_Artículos_Subcategoría" ManuallyRouted="false" />
+        <AssociationConnector Association="ElediModel.FK_Imágenes_Artículos" ManuallyRouted="false" />
+        <AssociationConnector Association="ElediModel.FK_Banners_Categorías" ManuallyRouted="false" />
+        <AssociationConnector Association="ElediModel.FK_Subcategoría_Categorías" ManuallyRouted="false" />
+        <AssociationConnector Association="ElediModel.FK_Formas_de_pago_Empresas_De_Pago" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

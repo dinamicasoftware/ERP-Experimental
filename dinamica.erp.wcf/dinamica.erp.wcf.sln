@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dinamica.erp.wcf", "dinamica.erp.wcf\dinamica.erp.wcf.csproj", "{AF7EF6D4-E13A-4D3F-BF0B-F284BDAB8384}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dinamica.erp.wcf.arm", "dinamica.erp.wcf.arm\dinamica.erp.wcf.arm.csproj", "{65B17A3F-16F0-483C-B66F-04968DC096BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConsole", "ClientConsole\ClientConsole.csproj", "{D9A6C99E-3CBB-425B-BD0B-B40DE765B169}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{AF7EF6D4-E13A-4D3F-BF0B-F284BDAB8384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF7EF6D4-E13A-4D3F-BF0B-F284BDAB8384}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF7EF6D4-E13A-4D3F-BF0B-F284BDAB8384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65B17A3F-16F0-483C-B66F-04968DC096BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65B17A3F-16F0-483C-B66F-04968DC096BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65B17A3F-16F0-483C-B66F-04968DC096BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65B17A3F-16F0-483C-B66F-04968DC096BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9A6C99E-3CBB-425B-BD0B-B40DE765B169}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9A6C99E-3CBB-425B-BD0B-B40DE765B169}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9A6C99E-3CBB-425B-BD0B-B40DE765B169}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9A6C99E-3CBB-425B-BD0B-B40DE765B169}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

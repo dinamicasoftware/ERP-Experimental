@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ElediModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Artículos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Título" Type="text" />
+          <Property Name="Descripción corta" Type="text" />
+          <Property Name="Descripción completa" Type="text" />
+          <Property Name="Subcategoría" Type="int" />
+          <Property Name="Publicado" Type="bit" />
+          <Property Name="Imagen Principal" Type="image" />
+          <Property Name="En Stock" Type="bit" />
+          <Property Name="Destacado" Type="bit" />
+          <Property Name="Precio Base" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banners">
+          <Key>
+            <PropertyRef Name="Banners" />
+          </Key>
+          <Property Name="Banners" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Título" Type="text" />
+          <Property Name="Imagen" Type="image" />
+          <Property Name="Banner vertical" Type="bit" />
+          <Property Name="Mostrar en portada" Type="bit" />
+          <Property Name="Categoría" Type="int" />
+          <Property Name="Link" Type="text" />
+        </EntityType>
+        <EntityType Name="BlogPosts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Título" Type="text" />
+          <Property Name="PrimerParrafo" Type="text" />
+          <Property Name="Contenido" Type="text" />
+          <Property Name="Imagen" Type="image" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categorías">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Título" Type="text" />
+        </EntityType>
+        <EntityType Name="Empresas De Pago">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Formas de pago">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Empresa de pagos" Type="int" Nullable="false" />
+          <Property Name="Cantidad de cuotas" Type="int" Nullable="false" />
+          <Property Name="Interés" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Imágenes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alt" Type="text" />
+          <Property Name="Imagen" Type="image" />
+          <Property Name="Articulo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marcas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="text" Nullable="false" />
+          <Property Name="Logotipo" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subcategoría">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCategoria" Type="int" Nullable="false" />
+          <Property Name="Título" Type="text" />
+        </EntityType>
+        <Association Name="FK_Artículos_Subcategoría">
+          <End Role="Subcategoría" Type="Self.Subcategoría" Multiplicity="0..1" />
+          <End Role="Artículos" Type="Self.Artículos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategoría">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Artículos">
+              <PropertyRef Name="Subcategoría" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banners_Categorías">
+          <End Role="Categorías" Type="Self.Categorías" Multiplicity="0..1" />
+          <End Role="Banners" Type="Self.Banners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorías">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Banners">
+              <PropertyRef Name="Categoría" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Formas de pago_Empresas De Pago">
+          <End Role="Empresas De Pago" Type="Self.Empresas De Pago" Multiplicity="1" />
+          <End Role="Formas de pago" Type="Self.Formas de pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas De Pago">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Formas de pago">
+              <PropertyRef Name="Empresa de pagos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Imágenes_Artículos">
+          <End Role="Artículos" Type="Self.Artículos" Multiplicity="1" />
+          <End Role="Imágenes" Type="Self.Imágenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artículos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Imágenes">
+              <PropertyRef Name="Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subcategoría_Categorías">
+          <End Role="Categorías" Type="Self.Categorías" Multiplicity="1" />
+          <End Role="Subcategoría" Type="Self.Subcategoría" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorías">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subcategoría">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ElediModelStoreContainer">
+          <EntitySet Name="Artículos" EntityType="Self.Artículos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banners" EntityType="Self.Banners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogPosts" EntityType="Self.BlogPosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorías" EntityType="Self.Categorías" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresas De Pago" EntityType="Self.Empresas De Pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Formas de pago" EntityType="Self.Formas de pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Imágenes" EntityType="Self.Imágenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marcas" EntityType="Self.Marcas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subcategoría" EntityType="Self.Subcategoría" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Artículos_Subcategoría" Association="Self.FK_Artículos_Subcategoría">
+            <End Role="Subcategoría" EntitySet="Subcategoría" />
+            <End Role="Artículos" EntitySet="Artículos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Banners_Categorías" Association="Self.FK_Banners_Categorías">
+            <End Role="Categorías" EntitySet="Categorías" />
+            <End Role="Banners" EntitySet="Banners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Formas de pago_Empresas De Pago" Association="Self.FK_Formas de pago_Empresas De Pago">
+            <End Role="Empresas De Pago" EntitySet="Empresas De Pago" />
+            <End Role="Formas de pago" EntitySet="Formas de pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Imágenes_Artículos" Association="Self.FK_Imágenes_Artículos">
+            <End Role="Artículos" EntitySet="Artículos" />
+            <End Role="Imágenes" EntitySet="Imágenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subcategoría_Categorías" Association="Self.FK_Subcategoría_Categorías">
+            <End Role="Categorías" EntitySet="Categorías" />
+            <End Role="Subcategoría" EntitySet="Subcategoría" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ElediModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Artículos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Título" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Descripción_corta" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Descripción_completa" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Subcategoría" Type="Int32" />
+          <Property Name="Publicado" Type="Boolean" />
+          <Property Name="Imagen_Principal" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="En_Stock" Type="Boolean" />
+          <Property Name="Destacado" Type="Boolean" />
+          <Property Name="Precio_Base" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Subcategoría1" Relationship="Self.FK_Artículos_Subcategoría" FromRole="Artículos" ToRole="Subcategoría" />
+          <NavigationProperty Name="Imágenes" Relationship="Self.FK_Imágenes_Artículos" FromRole="Artículos" ToRole="Imágenes" />
+        </EntityType>
+        <EntityType Name="Banners">
+          <Key>
+            <PropertyRef Name="Banners1" />
+          </Key>
+          <Property Name="Banners1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Título" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Banner_vertical" Type="Boolean" />
+          <Property Name="Mostrar_en_portada" Type="Boolean" />
+          <Property Name="Categoría" Type="Int32" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Categorías" Relationship="Self.FK_Banners_Categorías" FromRole="Banners" ToRole="Categorías" />
+        </EntityType>
+        <EntityType Name="BlogPosts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Título" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PrimerParrafo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Categorías">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Título" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Banners" Relationship="Self.FK_Banners_Categorías" FromRole="Categorías" ToRole="Banners" />
+          <NavigationProperty Name="Subcategoría" Relationship="Self.FK_Subcategoría_Categorías" FromRole="Categorías" ToRole="Subcategoría" />
+        </EntityType>
+        <EntityType Name="Empresas_De_Pago">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Formas_de_pago" Relationship="Self.FK_Formas_de_pago_Empresas_De_Pago" FromRole="Empresas_De_Pago" ToRole="Formas_de_pago" />
+        </EntityType>
+        <EntityType Name="Formas_de_pago">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Empresa_de_pagos" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad_de_cuotas" Type="Int32" Nullable="false" />
+          <Property Name="Interés" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Empresas_De_Pago" Relationship="Self.FK_Formas_de_pago_Empresas_De_Pago" FromRole="Formas_de_pago" ToRole="Empresas_De_Pago" />
+        </EntityType>
+        <EntityType Name="Imágenes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alt" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Articulo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Artículos" Relationship="Self.FK_Imágenes_Artículos" FromRole="Imágenes" ToRole="Artículos" />
+        </EntityType>
+        <EntityType Name="Marcas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Logotipo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Subcategoría">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCategoria" Type="Int32" Nullable="false" />
+          <Property Name="Título" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Artículos" Relationship="Self.FK_Artículos_Subcategoría" FromRole="Subcategoría" ToRole="Artículos" />
+          <NavigationProperty Name="Categorías" Relationship="Self.FK_Subcategoría_Categorías" FromRole="Subcategoría" ToRole="Categorías" />
+        </EntityType>
+        <Association Name="FK_Artículos_Subcategoría">
+          <End Role="Subcategoría" Type="Self.Subcategoría" Multiplicity="0..1" />
+          <End Role="Artículos" Type="Self.Artículos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subcategoría">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Artículos">
+              <PropertyRef Name="Subcategoría" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Imágenes_Artículos">
+          <End Role="Artículos" Type="Self.Artículos" Multiplicity="1" />
+          <End Role="Imágenes" Type="Self.Imágenes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artículos">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Imágenes">
+              <PropertyRef Name="Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Banners_Categorías">
+          <End Role="Categorías" Type="Self.Categorías" Multiplicity="0..1" />
+          <End Role="Banners" Type="Self.Banners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorías">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Banners">
+              <PropertyRef Name="Categoría" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Subcategoría_Categorías">
+          <End Role="Categorías" Type="Self.Categorías" Multiplicity="1" />
+          <End Role="Subcategoría" Type="Self.Subcategoría" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorías">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Subcategoría">
+              <PropertyRef Name="idCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Formas_de_pago_Empresas_De_Pago">
+          <End Role="Empresas_De_Pago" Type="Self.Empresas_De_Pago" Multiplicity="1" />
+          <End Role="Formas_de_pago" Type="Self.Formas_de_pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas_De_Pago">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Formas_de_pago">
+              <PropertyRef Name="Empresa_de_pagos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ElediEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Artículos" EntityType="Self.Artículos" />
+          <EntitySet Name="Banners" EntityType="Self.Banners" />
+          <EntitySet Name="BlogPosts" EntityType="Self.BlogPosts" />
+          <EntitySet Name="Categorías" EntityType="Self.Categorías" />
+          <EntitySet Name="Empresas_De_Pago" EntityType="Self.Empresas_De_Pago" />
+          <EntitySet Name="Formas_de_pago" EntityType="Self.Formas_de_pago" />
+          <EntitySet Name="Imágenes" EntityType="Self.Imágenes" />
+          <EntitySet Name="Marcas" EntityType="Self.Marcas" />
+          <EntitySet Name="Subcategoría" EntityType="Self.Subcategoría" />
+          <AssociationSet Name="FK_Artículos_Subcategoría" Association="Self.FK_Artículos_Subcategoría">
+            <End Role="Subcategoría" EntitySet="Subcategoría" />
+            <End Role="Artículos" EntitySet="Artículos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Imágenes_Artículos" Association="Self.FK_Imágenes_Artículos">
+            <End Role="Artículos" EntitySet="Artículos" />
+            <End Role="Imágenes" EntitySet="Imágenes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Banners_Categorías" Association="Self.FK_Banners_Categorías">
+            <End Role="Categorías" EntitySet="Categorías" />
+            <End Role="Banners" EntitySet="Banners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Subcategoría_Categorías" Association="Self.FK_Subcategoría_Categorías">
+            <End Role="Categorías" EntitySet="Categorías" />
+            <End Role="Subcategoría" EntitySet="Subcategoría" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Formas_de_pago_Empresas_De_Pago" Association="Self.FK_Formas_de_pago_Empresas_De_Pago">
+            <End Role="Empresas_De_Pago" EntitySet="Empresas_De_Pago" />
+            <End Role="Formas_de_pago" EntitySet="Formas_de_pago" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ElediModelStoreContainer" CdmEntityContainer="ElediEntities">
+          <EntitySetMapping Name="Artículos">
+            <EntityTypeMapping TypeName="ElediModel.Artículos">
+              <MappingFragment StoreEntitySet="Artículos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Título" ColumnName="Título" />
+                <ScalarProperty Name="Descripción_corta" ColumnName="Descripción corta" />
+                <ScalarProperty Name="Descripción_completa" ColumnName="Descripción completa" />
+                <ScalarProperty Name="Subcategoría" ColumnName="Subcategoría" />
+                <ScalarProperty Name="Publicado" ColumnName="Publicado" />
+                <ScalarProperty Name="Imagen_Principal" ColumnName="Imagen Principal" />
+                <ScalarProperty Name="En_Stock" ColumnName="En Stock" />
+                <ScalarProperty Name="Destacado" ColumnName="Destacado" />
+                <ScalarProperty Name="Precio_Base" ColumnName="Precio Base" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banners">
+            <EntityTypeMapping TypeName="ElediModel.Banners">
+              <MappingFragment StoreEntitySet="Banners">
+                <ScalarProperty Name="Banners1" ColumnName="Banners" />
+                <ScalarProperty Name="Título" ColumnName="Título" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Banner_vertical" ColumnName="Banner vertical" />
+                <ScalarProperty Name="Mostrar_en_portada" ColumnName="Mostrar en portada" />
+                <ScalarProperty Name="Categoría" ColumnName="Categoría" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogPosts">
+            <EntityTypeMapping TypeName="ElediModel.BlogPosts">
+              <MappingFragment StoreEntitySet="BlogPosts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Título" ColumnName="Título" />
+                <ScalarProperty Name="PrimerParrafo" ColumnName="PrimerParrafo" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorías">
+            <EntityTypeMapping TypeName="ElediModel.Categorías">
+              <MappingFragment StoreEntitySet="Categorías">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Título" ColumnName="Título" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas_De_Pago">
+            <EntityTypeMapping TypeName="ElediModel.Empresas_De_Pago">
+              <MappingFragment StoreEntitySet="Empresas De Pago">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Formas_de_pago">
+            <EntityTypeMapping TypeName="ElediModel.Formas_de_pago">
+              <MappingFragment StoreEntitySet="Formas de pago">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Empresa_de_pagos" ColumnName="Empresa de pagos" />
+                <ScalarProperty Name="Cantidad_de_cuotas" ColumnName="Cantidad de cuotas" />
+                <ScalarProperty Name="Interés" ColumnName="Interés" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imágenes">
+            <EntityTypeMapping TypeName="ElediModel.Imágenes">
+              <MappingFragment StoreEntitySet="Imágenes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Alt" ColumnName="Alt" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Articulo" ColumnName="Articulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marcas">
+            <EntityTypeMapping TypeName="ElediModel.Marcas">
+              <MappingFragment StoreEntitySet="Marcas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Logotipo" ColumnName="Logotipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subcategoría">
+            <EntityTypeMapping TypeName="ElediModel.Subcategoría">
+              <MappingFragment StoreEntitySet="Subcategoría">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+                <ScalarProperty Name="Título" ColumnName="Título" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
